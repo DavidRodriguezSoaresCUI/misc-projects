@@ -5,6 +5,11 @@
 
 I needed a tool for quickly, easily and accurately adding chapters to my videos, but failed to find one that met my expections.
 
+- **quick**: adding chapters takes seconds
+  > note that the initial FFmpeg scene change detection can take a few seconds or minutes depending on file size and computer performance
+- **easy**: comes with presets, accepts many timestamp formats
+- **accurate**: By default syncs chapters timestamps with scene changes in the video stream
+
 ## Technical notes
 
 I really wanted to try to make a file that behaves like a `.bat` file, specifically you can drag-and-drop
@@ -33,11 +38,36 @@ Focus on the first line
 All of this ensures the first line is only executed by the Windows command line, and the rest of the file
 is only executed by the Python interpreter.
 
+### Why use MKVmerge instead of FFmpeg for merging MKVs ?
+
+MKVmerge is widely recognised as the main and best muxer for the MKV format, also I dislike how FFmpeg strips metadata from MKV files.
+For other formats I find that FFmpeg is the best tool for its wide compatibility.
+
 ## Usage
 
 The main way is to simply drag-and-drop video files onto this script.
 
 Alternatively you can run it from the command line, passing it video file(s) path(s) as parameters.
+
+Timestamp formats accepted:
+
+- `XXhXXmXXs`: can be shortened if `XX` is `0`; `s` is optional; example `3m47` for 3 minutes 47 seconds
+- `XX:XX:XX`: like above but uses `:` separators; example `1:22:05` for 1 hour 22 minutes 5 seconds
+
+### Example - series mode
+
+Let's say you have many episodes of a show as files without intro and outro chapter marks and want to add them.
+
+1. Drag-and-drop the video files onto `add_chapters.bat`
+2. For each file you will be asked to choose a mode. Since you want to add chapters for intro and outro, choose `series`
+3. For each file, the script will ask you start and end timestamps for the intro and outro. Use a media player to determine them and input them (see above for accepted formats).
+  > If an episode doesn't have an intro or outro, you can skip it by leaving the timestamp field blank.
+4. For each file, after entering the timestamps, the script will pause (see section below), and after confirmation it will generate the output file with chapters.
+
+### Let's say you made a typo
+
+If you made a typo when entering a timestamp or chapter title, you can either fix the generated `.metadata` file when prompted, or fix it later and re-run the output file generation step using the generated `.merge.bat` script.
+
 
 ## Requirements
 
