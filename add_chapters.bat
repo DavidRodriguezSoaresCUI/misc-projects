@@ -43,6 +43,7 @@ is only executed by the Python interpreter.
 MKVmerge is widely recognised as the main and best muxer for the MKV format, also I dislike how FFmpeg strips metadata from MKV files.
 For other formats I find that FFmpeg is the best tool for its wide compatibility.
 
+
 ## Usage
 
 The main way is to simply drag-and-drop video files onto this script.
@@ -76,6 +77,7 @@ If you made a typo when entering a timestamp or chapter title, you can either fi
   - Python `>=3.10`, FFmpeg, MKVmerge (from MKVToolNix is fine) installed
   - The following must be callable from a shell : `python`, `ffmpeg`, `mkvmerge`
   - The Python package `drs.drslib>=0.10.0`
+
 
 ## License
 
